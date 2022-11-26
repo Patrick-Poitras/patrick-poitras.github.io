@@ -55,11 +55,13 @@ header {
 }
 
 .header-links {
-  text-align: center;
+    text-align: center;
+    text-decoration: none;
 }
 
 .header-link {
-  display: inline;
+    display: inline;
+    text-decoration: none;
 }
 
 header h1 {
@@ -72,11 +74,11 @@ header h1 {
   color: #F25627;//$header;
   letter-spacing: -1px;
   -webkit-font-smoothing: antialiased;
+  text-decoration: none;
 }
 
 header h2 {
   font-size: 18px;
-  font-weight: 300;
   color: #82AAFF;
 }
 
