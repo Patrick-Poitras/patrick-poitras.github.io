@@ -73,8 +73,8 @@ header h1 {
   font-family: Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace;
   color: $conifer;//$header;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1),
-               0 0 5px rgba(181, 232, 83, 0.1),
-               0 0 10px rgba(181, 232, 83, 0.1);
+               0 0 5px #8b5a00,
+               0 0 10px #8b5a00;
   letter-spacing: -1px;
   -webkit-font-smoothing: antialiased;
 }
@@ -155,7 +155,7 @@ pre {
   border: 1px solid rgba(255, 255, 255, 0.15);
   padding: 10px;
   font-size: 16px;
-  color: #b5e853;
+  color: #C3E88D;
   border-radius: 2px;
   text-wrap: normal;
   overflow: auto;
@@ -178,7 +178,7 @@ table {
 
 th {
   text-align: left;
-  border-bottom: 1px dashed #b5e853;
+  border-bottom: 1px dashed #C3E88D;
   padding: 5px 10px;
 }
 
@@ -189,8 +189,8 @@ td {
 hr {
   height: 0;
   border: 0;
-  border-bottom: 1px dashed #b5e853;
-  color: #b5e853;
+  border-bottom: 1px dashed #C3E88D;
+  color: #C3E88D;
 }
 
 /* Buttons
@@ -235,8 +235,8 @@ hr {
 */
 
 a {
-  color: #63c0f5;
-  text-shadow: 0 0 5px rgba(104, 182, 255, 0.5);
+  color: #89DDFF;
+  text-shadow: 0 0 5px rgba(137, 221, 255, 0.5);
 }
 
 a:active, a:focus {
