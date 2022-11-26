@@ -5,7 +5,7 @@
 @import "rouge-base16-dark";
 @import "default_colors";
 
-$body-background: #000000 !default;
+$body-background: #0F111A !default;
 $body-foreground: #A6ACCD !default;
 $header: #82AAFF !default;
 $blockquote-color: $silver-chalice !default;
@@ -14,7 +14,7 @@ $blockquote-border: $dove-grey !default;
 body {
   margin: 0;
   padding: 0;
-  background: $body-background url("../assets/bkg.png") 0 0;
+  background: $body-background;
   color: $body-foreground;
   font-size: 16px;
   line-height: 1.5;
@@ -71,10 +71,7 @@ header h1 {
   text-align: center;
   font-weight: bold;
   font-family: Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace;
-  color: $conifer;//$header;
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1),
-               0 0 5px #8b5a00,
-               0 0 10px #8b5a00;
+  color: #F78C6C;//$header;
   letter-spacing: -1px;
   -webkit-font-smoothing: antialiased;
 }
@@ -82,7 +79,7 @@ header h1 {
 header h2 {
   font-size: 18px;
   font-weight: 300;
-  color: #666;
+  color: #82AAFF;
 }
 
 /* Main Content
@@ -167,7 +164,7 @@ code.highlighter-rouge {
   border: 1px solid rgba(255, 255, 255, 0.15);
   padding: 0px 3px;
   margin: 0px -3px;
-  color: #aa759f;
+  color: #FF5370;
   border-radius: 2px;
 }
 
@@ -189,8 +186,8 @@ td {
 hr {
   height: 0;
   border: 0;
-  border-bottom: 1px dashed #C3E88D;
-  color: #C3E88D;
+  border-bottom: 1px dashed #090B10;
+  color: #090B10;
 }
 
 /* Buttons
