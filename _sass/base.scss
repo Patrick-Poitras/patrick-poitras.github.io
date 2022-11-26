@@ -6,7 +6,7 @@
 @import "default_colors";
 
 $body-background: #0F111A !default;
-$body-foreground: #A6ACCD !default;
+$body-foreground: #C8D8FF !default;
 $header: #82AAFF !default;
 $blockquote-color: $silver-chalice !default;
 $blockquote-border: $dove-grey !default;
@@ -29,7 +29,6 @@ body {
   margin: 0 auto;
 }
 
-
 section {
   display: block;
   margin: 0 0 20px 0;
@@ -51,7 +50,6 @@ li {
 
 header {
   background: rgba(0, 0, 0, 0.1);
-  border-bottom: 1px dashed $conifer; //header;
   padding: 20px;
   margin: 0 0 40px 0;
 }
@@ -71,7 +69,7 @@ header h1 {
   text-align: center;
   font-weight: bold;
   font-family: Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace;
-  color: #F78C6C;//$header;
+  color: #F25627;//$header;
   letter-spacing: -1px;
   -webkit-font-smoothing: antialiased;
 }
@@ -233,7 +231,7 @@ hr {
 
 a {
   color: #89DDFF;
-  text-shadow: 0 0 5px rgba(137, 221, 255, 0.5);
+  text-shadow: 0 0 5px rgba(137, 221, 255, 1);
 }
 
 a:active, a:focus {
