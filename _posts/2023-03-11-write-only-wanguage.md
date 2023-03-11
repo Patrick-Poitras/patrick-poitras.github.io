@@ -5,7 +5,7 @@ published: true
 
 I recently participated in the [4th installment of langjam](https://github.com/langjam/jam0004), a competition that makes its competitors create a programming language over a period of 48 hours. If that sounds like less time than it should take to make a good programming language, you'd be right, but I reckon that's not really the point of the competition.
 
-Anyway, I learned that this competition existed about half-way through the first day. I decided to look up the prompt which was \`\`\`the sound(ness) of one hand typing\`\`\`. I thought of the old adage which relates to the clapping of a single hand, and got to thinking about ways to design a programming language that was missing half of it, in such a way as to preclude its use. Moreover, we will answer the question "how shit can we make a programming language, before the language becomes completely unusable?"
+Anyway, I learned that this competition existed about half-way through the first day. I decided to look up the prompt which was ```the sound(ness) of one hand typing```. I thought of the old adage which relates to the clapping of a single hand, and got to thinking about ways to design a programming language that was missing half of it, in such a way as to preclude its use. Moreover, we will answer the question "how shit can we make a programming language, before the language becomes completely unusable?"
 
 The result is write-only-wanguage, or 'wow'. Available on github [here](https://github.com/Patrick-Poitras/write-only-wanguage).
 
@@ -19,7 +19,7 @@ We're going to allow internal reads and comparisons internally, despite being te
 
 How do we design a language that can't be interacted with? It can't be compiled, since the compiled code is an output, and it can't really be interpreted since the interpreter needs an input.
 
-But do we **really** need an input for an interpreted language?
+But do we **_really_** need an input for an interpreted language?
 
 If we take some inspiration from virtual machines, we can have a state machine that modifies its own state starting from a hardcoded value and proceeding from there. As such, the user does not pass in the input and our interpreter still runs. Magnificent!
 
@@ -398,7 +398,7 @@ acc = s
 
 This gives the right result in Python.
 
-¯\\<sub>(ツ)</sub>\_/¯
+¯\\\_(ツ)\_/¯
 
 
 # Work left to do
