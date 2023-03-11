@@ -26,11 +26,11 @@ If we take some inspiration from virtual machines, we can have a state machine t
 
 ## A crappy state machine: designed for jankiness
 
-We're already designing a language with no means of interaction. How could we make this worse? Let's go to a throwback of old. Let's say we have a really crappy computer as the basis of our state machine.
+We're already designing a language with no means of interaction. How could we make this worse? Let's go to a throwback of old. Let's imagine we have a really crappy computer as the basis of our state machine.
 
 Our state machine has an accumulator (ACC, 64-bit), an instruction register (INS, 16-bit). The choice of a 16-bit non-extendable instruction set really increases the jank. It has 256 unsigned 64-bit integers as memory, which we will call "heap". That's it. No stack pointer. No counter. No flags. You have to manually change the instruction register if you want to make it do things.
 
-I'm not certain of this, but I think that not even retrocomputers would be this bad. They had to actually sell units, after all, so we're trailblazing here. This is groundbreaking fundamental research!
+I'm not certain of this, but I think that not even the worst retrocomputers would be this bad. They had to actually sell units, after all, so we're trailblazing here. This is groundbreaking fundamental research!
 
 Here is what most of the logic flow looks like.
 
@@ -48,20 +48,20 @@ fn eval_loop() {
     let mut heap: [u64; 256] = [0; 256];
     // Main loop
     loop {
-    let ins = INS.load(Ordering::SeqCst);
-    INS.store(0, Ordering::SeqCst);
+        let ins = INS.load(Ordering::SeqCst);
+        INS.store(0, Ordering::SeqCst);
 
-    // Function dispatch on instruction
-    let cont: Continuation = match ins {
-        0xFFFF => terminate(),
-        0x0000 => processor_idle_sleep(),
-        // {... more commands ...}
-        _ => break,
-    };
-    match cont {
-        Continuation::Stop => break,
-        Continuation::Continue => continue,
-    };
+        // Function dispatch on instruction
+        let cont: Continuation = match ins {
+            0xFFFF => terminate(),
+            0x0000 => processor_idle_sleep(),
+            // {... more commands ...}
+            _ => break,
+        };
+        match cont {
+            Continuation::Stop => break,
+            Continuation::Continue => continue,
+        };
     }
 }
 ```
@@ -74,9 +74,6 @@ The program consists of a single loop that does the following in order:
 -   If stop, then break the loop and terminate the program.
 
 ACC starts off at 0, as does INS. The 0 instruction is a no-op. As such the program will loop forever and you have to kill the program to terminate it. Great language!
-
-
-<a id="org9dd1f77"></a>
 
 ### Functions
 
@@ -122,13 +119,13 @@ Enter modern multithreaded programming. We detach a thread whose only purpose is
 ```rust
 fn deferred_jam_instruction(ins: u16) {
     std::thread::spawn( move || {
-    let mut cycles = 10; // Lol deadlock prevention
-    while INS.load(Ordering::SeqCst) != 0 && cycles > 0 {
-        cycles -= 1; 
-        // Wait for INS = 0
-        thread::sleep(time::Duration::from_millis(2));
-    }
-    INS.store(ins, Ordering::SeqCst);
+        let mut cycles = 10; // Lol deadlock prevention
+        while INS.load(Ordering::SeqCst) != 0 && cycles > 0 {
+            cycles -= 1; 
+            // Wait for INS = 0
+            thread::sleep(time::Duration::from_millis(2));
+        }
+        INS.store(ins, Ordering::SeqCst);
     });
 }
 ```
@@ -221,7 +218,7 @@ This will hit the dispatch table and end up running the function `write_acc_all`
 ```rust
   fn write_acc_all(heap:&mut [u64; 256]) -> Continuation {
     for index in 0..0xFF {
-    write_acc(heap, index);
+        write_acc(heap, index);
     }
     Continuation::Continue
 }
@@ -377,21 +374,21 @@ Or, if you write it in pseudocode
 s = 0
 inc = 1
 while True:
-  # Doing "sum = sum + inc"
-  acc = 0
-  acc += s
-  acc += inc
-  sum = acc
+    # Doing "sum = sum + inc"
+    acc = 0
+    acc += s
+    acc += inc
+    sum = acc
 
-  # Doing "inc = inc + 2"
-  acc = 0
-  acc += inc
-  acc += 1
-  acc += 1
-  inc = acc
+    # Doing "inc = inc + 2"
+    acc = 0
+    acc += inc
+    acc += 1
+    acc += 1
+    inc = acc
 
-  if inc > 100:
-    break
+    if inc > 100:
+        break
 acc = 0
 acc = s
 ```
