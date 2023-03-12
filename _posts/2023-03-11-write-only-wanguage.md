@@ -96,11 +96,11 @@ Let's work through the control flow here.
 | Step | Place in code                     | heap[0x04] | ACC | INS    |
 |---- |--------------------------------- |---------- |--- |------ |
 | 0    | Start of loop                     | 0xA000     | any | 0xBA04 |
-| 1    | Dispatch -> set<sub>ins</sub>()   | 0xA000     | any | 0      |
-| 2    | After set<sub>ins</sub>()         | 0xA000     | any | 0xA000 |
+| 1    | Dispatch -> set_ins()   | 0xA000     | any | 0      |
+| 2    | After set_ins()         | 0xA000     | any | 0xA000 |
 | 3    | Start of loop                     | 0xA000     | any | 0xA000 |
-| 4    | Dispatch -> zero<sub>acc</sub>()  | 0xA000     | any | 0      |
-| 5    | After zero<sub>acc</sub>()        | 0xA000     | 0   | 0      |
+| 4    | Dispatch -> zero_acc()  | 0xA000     | any | 0      |
+| 5    | After zero_acc()        | 0xA000     | 0   | 0      |
 | 6    | (At this point, it loops forever) | 0xA000     | 0   | 0      |
 
 We need a second instruction that tells the machine where the next instruction is located.
@@ -157,21 +157,21 @@ Let's see this in action.
 | Step | Place in code                                               | heap[0x04] | ACC | INS                |
 |---- |----------------------------------------------------------- |---------- |--- |------------------ |
 | 0    | Start of loop                                               | 0xA000     | any | 0xBB04             |
-| 1    | Dispatch -> set<sub>ins</sub><sub>and</sub><sub>jam</sub>() | 0xA000     | any | 0                  |
-| 2    | After set<sub>ins</sub><sub>and</sub><sub>jam</sub>()       | 0xA000     | any | 0xA000             |
-| 3    | Dispatch -> zero<sub>acc</sub>()                            | 0xA000     | any | 0xBB06             |
-| 4    | After zero<sub>acc</sub>()                                  | 0xA000     | 0   | 0xBB06             |
-| 5    | Dispatch -> set<sub>ins</sub><sub>and</sub><sub>jam</sub>() | 0xA000     | 0   | 0                  |
-| 6    | After set<sub>ins</sub><sub>and</sub><sub>jam</sub>         | 0xA000     | 0   | 0xA001             |
+| 1    | Dispatch -> set_ins_and_jam() | 0xA000     | any | 0                  |
+| 2    | After set_ins_and_jam()       | 0xA000     | any | 0xA000             |
+| 3    | Dispatch -> zero_acc()                            | 0xA000     | any | 0xBB06             |
+| 4    | After zero_acc()                                  | 0xA000     | 0   | 0xBB06             |
+| 5    | Dispatch -> set_ins_and_jam() | 0xA000     | 0   | 0                  |
+| 6    | After set_ins_and_jam         | 0xA000     | 0   | 0xA001             |
 | 7    | (Prior to dispatch)                                         | 0xA000     | 0   | 0                  |
-| 8    | Dispatch -> incr<sub>acc</sub>()                            | 0xA000     | 0   | 0xBB08 (jammed in) |
-| 9    | After incr<sub>acc</sub>()                                  | 0xA000     | 1   | 0xBB08             |
-| 10   | Dispatch -> set<sub>ins</sub><sub>and</sub><sub>jam</sub>() | 0xA000     | 1   | 0                  |
-| 11   | After set<sub>ins</sub><sub>and</sub><sub>jam</sub>()       | 0xA000     | 1   | 0xA001             |
-| 12   | Dispatch -> incr<sub>acc</sub>()                            | 0xA000     | 1   | 0                  |
-| 13   | After incr<sub>acc</sub>()                                  | 0xA000     | 2   | 0xAA04 (jammed in) |
-| 14   | Dispatch -> write<sub>acc</sub>()                           | 0xA000     | 2   | 0                  |
-| 15   | After write<sub>acc</sub>()                                 | 2          | 2   | 0                  |
+| 8    | Dispatch -> incr_acc()                            | 0xA000     | 0   | 0xBB08 (jammed in) |
+| 9    | After incr_acc()                                  | 0xA000     | 1   | 0xBB08             |
+| 10   | Dispatch -> set_ins_and_jam() | 0xA000     | 1   | 0                  |
+| 11   | After set_ins_and_jam()       | 0xA000     | 1   | 0xA001             |
+| 12   | Dispatch -> incr_acc()                            | 0xA000     | 1   | 0                  |
+| 13   | After incr_acc()                                  | 0xA000     | 2   | 0xAA04 (jammed in) |
+| 14   | Dispatch -> write_acc()                           | 0xA000     | 2   | 0                  |
+| 15   | After write_acc()                                 | 2          | 2   | 0                  |
 |      | (At this point, it loops forever)                           | 2          | 2   | 0                  |
 
 Fantastic! The jammer is a very nice and not at all problematic way to do what could be done by a simple data structure. But this still doesn't solve the main problem: how is this scenario possible if all the memory values, including ACC and INS, are set to 0?
